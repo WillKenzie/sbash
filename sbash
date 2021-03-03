@@ -1,0 +1,27 @@
+#!/bin/bash
+clear
+if [ "$UID" == "0" ]
+then
+echo "[!] Root has been disabled on this machine!"
+else
+echo "Welcome to $HOSTNAME"
+echo $(uname -s) $(uname -r) system
+echo
+echo
+while (true) do
+echo -n "$USER: $PWD>  "
+read command;
+# Parse the command here
+if [ "$command" == "su" ]
+then
+echo "[!] Root has been disabled on this machine!"
+else
+if [ "$command" == "su root" ]
+then
+echo "[!] Root has been disabled on this machine!"
+else
+eval firejail --quiet $command
+fi
+fi
+done
+fi
